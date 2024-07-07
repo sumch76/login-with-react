@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
     if (!passwordMatched) {
       return res.status(400).send({ message: "wrong password" });
     }
-        //  return res.status(200).send({ existingUser,passwordMatched });
+
     const jwtToken = jwt.sign(
       {
         _id: existingUser._id,
@@ -60,11 +60,27 @@ exports.login = async (req, res) => {
     return res.status(500).send({ message: "Error log in!", error: error });
   }
 };
+
 exports.logout = async (req, res) => {
   try {
     res.clearCookie("token");
     return res.status(200).send({ message: "logged out successfully!" });
   } catch (error) {
     return res.status(500).send({ message: "Error logging out!", error });
+  }
+};
+
+exports.myDetails = async (req, res) => {
+  const userId = req._id;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "cannot find user" });
+    }
+    return res.status(200).send({ user });
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ message: "Error Getting my details!", error });
   }
 };
