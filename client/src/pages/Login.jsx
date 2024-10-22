@@ -18,7 +18,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/user/login", {
+      await axios.post("https://login-with-react-api.vercel.app/user/login", {
         email: loginInput.email,
         password: loginInput.password,
       });

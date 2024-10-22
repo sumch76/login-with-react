@@ -9,7 +9,7 @@ export default function Home() {
 
   const getUserDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/user/my-details");
+      const response = await axios.get("https://login-with-react-api.vercel.app/user/my-details");
       setIsLoggedIn(true);
       setUserData(response.data.user);
     } catch (error) {
