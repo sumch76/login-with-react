@@ -7,13 +7,19 @@ const cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+// Update the CORS origin to the deployed frontend URL
+app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173", credentials: true }));
+
 require("dotenv").config();
 
-//routes
+// Routes
 app.use("/user", UserAuthRouter);
 
 dbConnect();
-app.listen(4000, () => {
-  console.log("http://localhost:4000");
+
+// Vercel will automatically assign the port, so we use process.env.PORT
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
