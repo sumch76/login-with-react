@@ -9,7 +9,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("https://login-with-react.vercel.app/user/logout");
+      await axios.post("http://localhost:4000/user/logout");
     } catch (error) {
       handleError(error);
     }

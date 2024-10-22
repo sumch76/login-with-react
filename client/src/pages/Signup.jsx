@@ -18,7 +18,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://login-with-react-api.vercel.app/", {
+      await axios.post("http://localhost:4000/user/signup", {
         email: signupInput.email,
         password: signupInput.password,
         username: signupInput.username,
